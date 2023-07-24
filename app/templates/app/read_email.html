@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f1f3;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .email-details {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+        }
+
+        .attachment-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .attachment-list li {
+            margin-bottom: 5px;
+        }
+
+        .attachment-list li a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Read Email</h1>
+    <div class="email-details">
+        <h2>{{ email.subject }}</h2>
+        <p>From: {{ email.sender }}</p>
+        <p>To: {{ email.recipient }}</p>
+        <p>Timestamp: {{ email.timestamp }}</p>
+        <hr>
+        <div class="email-body">{{ email.body }}</div>
+        {% if email.attachments.all %}
+            <h3>Attachments:</h3>
+            <ul class="attachment-list">
+                {% for attachment in email.attachments.all %}
+                    <li><a href="{{ attachment.file.url }}" download>{{ attachment.file.name }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No attachments</p>
+        {% endif %}
+    </div>
+    <a href="{% url 'inbox' %}">Back to Inbox</a>
+</body>
+</html>

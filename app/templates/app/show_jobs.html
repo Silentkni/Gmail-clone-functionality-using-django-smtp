@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cron Jobs</title>
+</head>
+<body>
+    <h1>Cron Jobs</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Job</th>
+                <th>Last Run</th>
+                <th>Next Run</th>
+                <th>Success</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cron_job in cron_jobs %}
+            <tr>
+                <td>{{ cron_job.id }}</td>
+                <td>{{ cron_job.name }}</td>
+                <td>{{ cron_job.start_time }}</td>
+                <td>{{ cron_job.next_run_time }}</td>
+                <td>{{ cron_job.is_success }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
